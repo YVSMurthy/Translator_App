@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
             children: [
               Container(
                 width: w * 0.874,
-                height: h * 0.15,
+                height: h * 0.2,
                 decoration: BoxDecoration(
                   color: Color(0xffA3DFE9),
                   borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -31,8 +31,8 @@ class HomePage extends StatelessWidget {
                   children: [
                     Image.asset(
                       'assets/book.png',
-                      width: 0.3*w,
-                      height: 0.1*h,
+                      width: 0.35*w,
+                      height: 0.15*h,
                       fit: BoxFit.contain,
                     ),
                     Expanded( // Adjust width of the Column dynamically
@@ -43,36 +43,36 @@ class HomePage extends StatelessWidget {
                           Text(
                             "Welcome Back",
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 24,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
                             "Let's break down language barriers together.",
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(width: 5),
+                    SizedBox(width: 10),
                   ]
                 ),
               ),
 
-              SizedBox(height: 50),
+              SizedBox(height: 60),
 
               Text(
                 "Services",
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 40,
                   fontWeight: FontWeight.bold,
                 ),
               ),
 
-              SizedBox(height: 20),
+              SizedBox(height: 24),
 
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -88,7 +88,7 @@ class HomePage extends StatelessWidget {
 
                     child: Container(
                       width: w*0.85,
-                      height: h*0.15,
+                      height: h*0.2,
                       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                       decoration: BoxDecoration(
                         color: Color(0xFFDCDCFF),
@@ -130,7 +130,7 @@ class HomePage extends StatelessWidget {
 
                     child: Container(
                       width: w*1.5,
-                      height: h*0.15,
+                      height: h*0.2,
                       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                       decoration: BoxDecoration(
                         color: Color(0xFFF9D5B5),
@@ -158,47 +158,6 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                  SizedBox(height: 40),
-
-                  GestureDetector( 
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const TextToText()),
-                      );
-                    },
-
-                    child: Container(
-                      width: w*0.85,
-                      height: h*0.15,
-                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFFFA1A1),
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            'assets/translate.png',
-                            width: 0.15*w,
-                            height: 0.15*h,
-                            fit: BoxFit.contain,
-                          ),
-                          SizedBox(width: 30),
-                          Expanded(
-                            child: Text(
-                              "Two-way real-time translation for smooth live chat communication.",
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500
-                              )
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
                 ],
               ),
             ],

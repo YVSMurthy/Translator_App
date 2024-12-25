@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '/pages/home_page.dart';
-void main() {
+void main() async {
+  // await dotenv.load(fileName: ".env");
+  // print('API_URI: ${dotenv.env['API_URI']}');
   runApp(const MyApp());
 }
 
