@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:translator/translator.dart';
 
 class TextToText extends StatefulWidget {
   const TextToText({super.key});
@@ -8,6 +9,7 @@ class TextToText extends StatefulWidget {
 }
 
 class _TextToText extends State<TextToText> {
+
   List<DropdownMenuItem<String>> languageOptions = [
     DropdownMenuItem(value: 'af', child: Text('Afrikaans')),
     DropdownMenuItem(value: 'sq', child: Text('Albanian')),
@@ -75,48 +77,21 @@ class _TextToText extends State<TextToText> {
   String inputText = "";
   String outputText = "";
 
-  Future<void> translateText(String text, String sourceLang, String targetLang) async {
-    String apiUri = 'https://libretranslate.com/translate';
-
+  Future<void> translateText(String text, String fromLang, String toLang) async {
     try {
-      // final response = await http.post(
-      //   Uri.parse(apiUri),
-      //   headers: {"Content-Type": "application/json"},
-      //   body: jsonEncode({
-      //     "q": text,
-      //     "source": sourceLang,
-      //     "target": targetLang,
-      //     "format": "text",
-      //     "alternatives": 3,
-      //     "api": "", // Ensure you're passing correct params as per API documentation
-      //   }),
-      // );
-
-      // print('Response Status: ${response.statusCode}');
-      // print('Response Body: ${response.body}');
-
-      // if (response.statusCode == 200) {
-      //   final Map<String, dynamic> data = jsonDecode(response.body);
-      //   print('Translated Text: ${data["translatedText"]}');
-      //   setState(() {
-      //     outputText = "Output text is :: " + data["translatedText"];
-      //   });
-      // } else {
-      //   setState(() {
-      //     outputText = "Error: ${response.statusCode}";
-      //   });
-      // }
+      final result = await text.translate(
+        from: fromLang,
+        to: toLang
+      );
       setState(() {
-        outputText = text;
+        outputText = result.text;
       });
     } catch (e) {
-      print('Error: $e');
       setState(() {
-        outputText = "Error: $e";
+        outputText = '';
       });
     }
   }
-
 
   @override
   Widget build(BuildContext context) {

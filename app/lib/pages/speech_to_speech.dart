@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:translator/translator.dart';
 
 class SpeechToSpeech extends StatefulWidget {
   const SpeechToSpeech({super.key});
@@ -81,7 +82,6 @@ class _SpeechToSpeech extends State<SpeechToSpeech> {
   late stt.SpeechToText _speech; // Speech-to-text instance
   late FlutterTts _flutterTts; // Text-to-speech instance
 
-
   @override
   void initState() {
     super.initState();
@@ -109,7 +109,6 @@ class _SpeechToSpeech extends State<SpeechToSpeech> {
         _speech.listen(onResult: (result) {
           setState(() {
             inputText = result.recognizedWords;
-            print(result.recognizedWords);
           });
         });
       }
@@ -179,53 +178,42 @@ class _SpeechToSpeech extends State<SpeechToSpeech> {
       'cy': 'cy-GB', // Welsh
     };
 
-    String? language = languageToVoiceMap[toLang];
+    // Available languages from the TTS engine
+    var availableLanguages = await FlutterTts().getLanguages;
+    String voiceToUse;
+    print(availableLanguages);
 
-    await _flutterTts.setLanguage(language!); // Simplified language mapping
+    // Check if the selected language is in the available list
+    if (availableLanguages.contains(languageToVoiceMap[toLang])) {
+      voiceToUse = languageToVoiceMap[toLang]!;
+    } else {
+      // If the language is not available, default to English (en-US)
+      voiceToUse = 'en-US';
+    }
+
+    print("$toLang   $voiceToUse");
+
+    await _flutterTts.setLanguage(voiceToUse); // Simplified language mapping
     await _flutterTts.setPitch(1.0);
+    await _flutterTts.setVolume(1.0);
     await _flutterTts.speak(text);
 
   }
 
   // Function to simulate translation (you can replace this with actual logic)
-  Future<void> translateText(String text, String sourceLang, String targetLang) async {
-    String apiUri = 'https://libretranslate.com/translate';
-
+  Future<void> translateText(String text, String fromLang, String toLang) async {
     try {
-      // final response = await http.post(
-      //   Uri.parse(apiUri),
-      //   headers: {"Content-Type": "application/json"},
-      //   body: jsonEncode({
-      //     "q": text,
-      //     "source": sourceLang,
-      //     "target": targetLang,
-      //     "format": "text",
-      //     "alternatives": 3,
-      //     "api": "", // Ensure you're passing correct params as per API documentation
-      //   }),
-      // );
-
-      // print('Response Status: ${response.statusCode}');
-      // print('Response Body: ${response.body}');
-
-      // if (response.statusCode == 200) {
-      //   final Map<String, dynamic> data = jsonDecode(response.body);
-      //   print('Translated Text: ${data["translatedText"]}');
-      //   setState(() {
-      //     outputText = "Output text is :: " + data["translatedText"];
-      //   });
-      // } else {
-      //   setState(() {
-      //     outputText = "Error: ${response.statusCode}";
-      //   });
-      // }
+      final result = await text.translate(
+        from: fromLang,
+        to: toLang
+      );
       setState(() {
-        outputText = "Hola. ¿Cómo estás?";
+        outputText = result.text;
       });
+      getTextToSpeech(outputText);
     } catch (e) {
-      print('Error: $e');
       setState(() {
-        outputText = "Error: $e";
+        outputText = '';
       });
     }
   }
