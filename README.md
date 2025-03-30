@@ -57,30 +57,6 @@ flutter pub get
 flutter run
 ```
 
-## Project Structure
-
-```
-flutter_translator/
-├── android/                    # Android-specific files
-├── ios/                        # iOS-specific files
-├── lib/                        # Dart source code
-│   ├── main.dart               # Entry point of the application
-│   ├── screens/                # UI screens
-│   │   ├── home_screen.dart    # Main screen
-│   │   ├── t2t_screen.dart     # Text to Text translation screen
-│   │   └── s2s_screen.dart     # Speech to Speech translation screen
-│   ├── services/               # Service classes
-│   │   ├── translator.dart     # Translation service
-│   │   ├── speech_to_text.dart # Voice recognition service
-│   │   └── text_to_speech.dart # Text to voice service
-│   └── widgets/                # Reusable UI components
-├── assets/                     # Assets like images, fonts
-│   └── screenshots/            # App screenshots
-│       ├── home.png
-│       ├── t2t.png
-│       └── s2s.png
-└── pubspec.yaml                # Project dependencies
-```
 
 ## Dependencies
 
